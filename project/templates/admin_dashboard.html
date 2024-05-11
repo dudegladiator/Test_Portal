@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        body {
+            padding: 20px;
+        }
+
+        .question-item {
+            margin-bottom: 20px;
+            border: 1px solid #ccc;
+            padding: 10px;
+            position: relative;
+        }
+
+        .delete-btn {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+        }
+
+        .edit-btn {
+            position: absolute;
+            top: 5px;
+            right: 70px;
+        }
+
+        .add-btn {
+            margin-top: 10px;
+        }
+
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Admin Dashboard</h1>
+        <a href="{{ url_for('dashboard.dashboard1') }}" class="button">
+            Back to Dashboard
+        </a>
+        <form action="{{ url_for('admin.update') }}" method="POST" id="questionForm">
+            <h3>Edit Test Settings</h3>
+            {% for key, value in admin.default.items() %}
+            {% if key != 'total_questions' and key != 'test_name' %}
+            <div class="question-item">
+                <h7>{{ key.upper() }} (Each Question in Sec)</h7>
+                <input type="text" name="{{ key }}" value="{{ value }}" class="form-control mb-2" placeholder="{{ key }}">
+                <div>Time limit for whole test = time_limit X total_questions </div>
+            </div>
+            {% endif %}
+            {% endfor %}
+            <h3>Edit Questions</h3>
+            <div id="questionList">
+                {% for index, question in questions.items() %}
+                <div class="question-item">
+                    <button type="button" class="btn btn-sm btn-danger delete-btn" onclick="deleteQuestion(this)">Delete</button>
+                    <button type="button" class="btn btn-sm btn-primary edit-btn" onclick="editQuestion(this)">Edit</button>
+                    <input type="text" name="question" value="{{ question['question'] }}" class="form-control mb-2"
+                        placeholder="Question" readonly>
+                    <input type="text" name="options" value="{{ ','.join(question['options']) }}" class="form-control mb-2"
+                        placeholder="Options (comma separated) - No space" readonly>
+                    <input type="text" name="correct_answer" value="{{ question['correct_answer'] }}" class="form-control mb-2"
+                        placeholder="Correct Answer" readonly>
+                    <input type="number" name="score" value="{{ question.get('score', 1) }}" class="form-control mb-2"
+                        placeholder="Score" readonly>
+                    <input type="number" name="negative_score" value="{{ question.get('negative_score', 0) }}"
+                        class="form-control mb-2" placeholder="Negative Score" readonly>
+                </div>
+                {% endfor %}
+            </div>
+            <button type="submit" class="btn btn-primary">Save Changes</button>
+            <button type="button" class="btn btn-primary" onclick="addQuestion()">Add Question</button>
+        </form>
+    </div>
+
+    <script>
+        function deleteQuestion(button) {
+            button.parentNode.remove();
+        }
+
+        function editQuestion(button) {
+            var questionItem = button.parentNode;
+            var inputs = questionItem.getElementsByTagName('input');
+            for (var i = 0; i < inputs.length; i++) {
+                inputs[i].readOnly = false;
+            }
+        }
+
+        function addQuestion() {
+            var questionList = document.getElementById('questionList');
+            var questionItem = document.createElement('div');
+            questionItem.className = 'question-item';
+            questionItem.innerHTML = `
+                <button type="button" class="btn btn-sm btn-danger delete-btn" onclick="deleteQuestion(this)">Delete</button>
+                <button type="button" class="btn btn-sm btn-primary edit-btn" onclick="editQuestion(this)">Edit</button>
+                <input type="text" name="question" class="form-control mb-2" placeholder="Question">
+                <input type="text" name="options" class="form-control mb-2" placeholder="Options (comma separated) - No Space">
+                <input type="text" name="correct_answer" class="form-control mb-2" placeholder="Correct Answer">
+                <input type="number" name="score" class="form-control mb-2" placeholder="Score"value="1">
+                <input type="number" name="negative_score" class="form-control mb-2" placeholder="Negative Score" value="0">
+            `;
+            questionList.appendChild(questionItem);
+        }
+    </script>
+</body>
+
+</html>

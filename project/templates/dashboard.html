@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<h1>Welcome {{current_user.name}}</h1>
+<a href="{{ url_for('test.test_page') }}" class="button">
+    Start Test
+</a>
+
+{% endblock %}

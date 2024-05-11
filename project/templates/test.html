@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+
+{% block content %}
+
+<div>
+    <h2>{{ question.question }}</h2>
+    <div id="timer">Time Remaining: <span id="countdown"></span></div>
+    <form id="answerForm" action="{{ url_for('test.answer') }}" method="post">
+        {% for option in question.options %}
+        <input type="radio" id="{{ option }}" name="answer" value="{{ option }}">
+        <label for="{{ option }}">{{ option }}</label><br>
+        {% endfor %}
+        <input type="hidden" id="timeLeftInput" name="timeLeft" value="">
+        <button type="submit">Submit</button>
+    </form>
+</div>
+
+<script>
+    var timeLimit = {{time_limit}};
+    var startTimeKey = 'startTime';
+
+    // Get start time from session storage or create a new one
+    var startTime = sessionStorage.getItem(startTimeKey);
+    if (!startTime) {
+        startTime = new Date().getTime();
+        sessionStorage.setItem(startTimeKey, startTime);
+    }
+
+    startTimer(startTime);
+
+    function startTimer(startTime) {
+        var timer = setInterval(function() {
+            var now = new Date().getTime();
+            var elapsedTime = (now - startTime) / 1000; // Convert elapsed time to seconds
+            var timeLeft = timeLimit - elapsedTime;
+
+            // Update timer display and hidden input
+            document.getElementById('countdown').textContent = Math.max(0, Math.floor(timeLeft));
+            document.getElementById('timeLeftInput').value = Math.floor(timeLeft);
+
+            // Check if time is up
+            if (timeLeft <= 0) {
+                sessionStorage.removeItem(startTimeKey);
+                clearInterval(timer);
+                document.getElementById('answerForm').submit();
+            }
+        }, 1000);
+    }
+
+    // Clear session storage when form is submitted
+    document.getElementById('answerForm').addEventListener('submit', function() {
+        sessionStorage.removeItem(startTimeKey);
+        
+    });
+</script>
+
+{% endblock %}
