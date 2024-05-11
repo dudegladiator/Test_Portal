@@ -5,7 +5,7 @@ To run the Project
 
 1. Clone the repo
 ```sh
-git clone 
+git clone https://github.com/dudegladiator/Test_Portal
 ```
 
 2. Go to the source code
