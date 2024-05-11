@@ -1,1 +1,73 @@
-{"1": {"question": "What is the output of typeof typeof 1?", "options": ["number", "string", "undefined", "TypeError"], "correct_answer": "string", "score": 1, "negative_score": 0}, "2": {"question": "Which of the following is not a valid JavaScript variable name?", "options": ["2myVar", "_myVar", "$myVar", "myVar2"], "correct_answer": "2myVar", "score": 1, "negative_score": 0}, "3": {"question": "What does the isNaN() function do?", "options": ["Checks if a value is not a number", "Converts a string to a number", "Checks if a value is a number", "None of the above"], "correct_answer": "Checks if a value is not a number", "score": 1, "negative_score": 0}, "4": {"question": "Which method is used to remove the last element ? ", "options": ["true", "false", "NaN", "Error"], "correct_answer": "true", "score": 1, "negative_score": 0}}
+{
+    "1": {
+        "question": "What is JavaScript?",
+        "options": ["A scripting language", "A programming language", "A markup language", "A database language"],
+        "correct_answer": "A scripting language",
+        "score": 1,
+        "negative_score": 0
+    },
+    "2": {
+        "question": "What symbol is used to denote comments in JavaScript?",
+        "options": ["//", "/*", "#", "--"],
+        "correct_answer": "//",
+        "score": 1,
+        "negative_score": 0
+    },
+    "3": {
+        "question": "Which method is used to remove the last element from an array?",
+        "options": ["pop()", "remove()", "shift()", "splice()"],
+        "correct_answer": "pop()",
+        "score": 1,
+        "negative_score": 0
+    },
+    "4": {
+        "question": "What does DOM stand for?",
+        "options": ["Document Object Model", "Data Object Model", "Digital Object Model", "Document Oriented Model"],
+        "correct_answer": "Document Object Model",
+        "score": 1,
+        "negative_score": 0
+    },
+    "5": {
+        "question": "How do you declare a variable in JavaScript?",
+        "options": ["var", "let", "const", "All of the above"],
+        "correct_answer": "All of the above",
+        "score": 1,
+        "negative_score": 0
+    },
+    "6": {
+        "question": "What is the result of 10 + \"5\" in JavaScript?",
+        "options": ["15", "105", "10", "Error"],
+        "correct_answer": "105",
+        "score": 1,
+        "negative_score": 0
+    },
+    "7": {
+        "question": "What is the output of typeof typeof 1?",
+        "options": ["number", "string", "undefined", "TypeError"],
+        "correct_answer": "string",
+        "score": 1,
+        "negative_score": 0
+    },
+    "8": {
+        "question": "Which of the following is not a valid JavaScript variable name?",
+        "options": ["2myVar", "_myVar", "$myVar", "myVar2"],
+        "correct_answer": "2myVar",
+        "score": 1,
+        "negative_score": 0
+    },
+    "9": {
+        "question": "What does the isNaN() function do?",
+        "options": ["Checks if a value is not a number", "Converts a string to a number", "Checks if a value is a number", "None of the above"],
+        "correct_answer": "Checks if a value is not a number",
+        "score": 1,
+        "negative_score": 0
+    },
+    "10": {
+        "question": "What is the result of 10 == \"10\" in JavaScript?",
+        "options": ["true", "false", "NaN", "Error"],
+        "correct_answer": "true",
+        "score": 1,
+        "negative_score": 0
+    }
+}
+
